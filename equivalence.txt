@@ -1,0 +1,10 @@
+header: 9-19 characters in length, any allowed
+9 any ch and 19 any characters
+123456789
+1234567891234567890
+
+
+MKE: 2-4 in length, alphabetical or special characters allowed
+test data: 2 and 4 alphabetical characters
+ts and test
+
