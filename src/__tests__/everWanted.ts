@@ -24,6 +24,7 @@ export class everWanted {
   lState: By = By.name('lisInput');
   lYear: By = By.name('liyInput');
   submit: By = By.id('saveBtn');
+  result: By = By.id('validHeader')
 
   constructor(driver: WebDriver) {
     this.driver = driver;
@@ -38,14 +39,22 @@ export class everWanted {
     await this.driver.wait(until.elementsLocated(elementBy));
     return this.driver.findElement(elementBy).sendKeys(keys);
     }
+  async findElement(keys) {
+    await this.driver.wait(until.elementIsVisible(keys));
+    await this.driver.findElement(keys);
+  }
+  async clickButton(elementBy) {
+    await this.driver.wait(until.elementIsVisible(elementBy));
+    await this.driver.findElement(elementBy);
+  }
+  async getResult(elementBy) {
+    await this.driver.wait(until.elementIsVisible(elementBy));
+    await this.driver.findElement(elementBy);
+  }
 
 }
 
 const sendKeys = async function (driver, elementBy: By, keys) {
   await driver.wait(until.elementLocated(elementBy));
   return driver.findElement(elementBy).sendKeys(keys);
-};
-const click = async function (driver, elementBy: By) {
-  await driver.wait(until.elementLocated(elementBy));
-  return (await driver.findElement(elementBy)).click();
 };

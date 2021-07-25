@@ -1,6 +1,7 @@
 const chromedriver = require("chromedriver");
 import { waitForDebugger } from "inspector";
 import { WebDriver, Builder, Capabilities, until } from "selenium-webdriver";
+import { elementIsVisible } from "selenium-webdriver/lib/until";
 import { everWanted } from "./everWanted";
 const driver: WebDriver = new Builder()
   .withCapabilities(Capabilities.chrome())
@@ -52,11 +53,11 @@ describe("Ever Wanterd app", () => {
             await app.sendKeys(app.lState, "SC");
             await driver.wait(until.elementIsVisible(await driver.findElement(app.lYear)));
             await app.sendKeys(app.lYear, "2021");
+            await driver.wait(until.elementIsVisible(await driver.findElement(app.submit)));
+            await app.clickButton(app.submit);
+            let theResult = await driver.wait(until.elementIsVisible(await driver.findElement(app.result)));
+            expect(theResult).toBe("Valid");
 
-
-
-//   await app.header("it should be 9 to 19 characters long");
-//   expect(await app.error).not.toContain(this.headerError);
 });
 afterAll(async () => {
   await driver.quit();
