@@ -54,13 +54,16 @@ describe("Ever Wanterd app", () => {
             await driver.wait(until.elementIsVisible(await driver.findElement(app.lYear)));
             await app.sendKeys(app.lYear, "2021");
             await driver.wait(until.elementIsVisible(await driver.findElement(app.submit)));
-            await app.clickButton(app.submit);
+            await driver.sleep(3000);
+            return await (await app.driver.findElement(app.submit)).click();
+           
             let theResult = await driver.wait(until.elementIsVisible(await driver.findElement(app.result)));
             expect(theResult).toBe("Valid");
+            await driver.sleep(3000);
 
 });
-afterAll(async () => {
-  await driver.quit();
-    });
+// afterAll(async () => {
+//   await driver.quit();
+//     });
   });
 });
